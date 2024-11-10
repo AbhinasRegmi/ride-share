@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(User::class)->cascadeOnDelete();
-            $table->foreignId('driver_id')->constrained(Driver::class)->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('driver_id')->constrained('drivers')->cascadeOnDelete();
             $table->string('status');
             $table->timestamps();
         });
