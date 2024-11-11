@@ -12,3 +12,6 @@ Route::middleware(["auth:sanctum"])
             Route::get("/user", [AuthController::class, "user"])->name("user");
         }
     );
+
+Route::post("/login", [AuthController::class, "loginWithPhone"])->name("login");
+Route::post("/verify", [AuthController::class, "verifyLoginCode"])->name("verify");
