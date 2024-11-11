@@ -27,6 +27,12 @@ class User extends Authenticatable
         ];
     }
 
+    // twilio looks for phone_number attribute but we have phone as attribute name
+    public function routeNotificationForTwilio()
+    {
+        return $this->phone;
+    }
+
     public function drive(): HasOne 
     {
         return $this->hasOne(Driver::class);
