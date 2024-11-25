@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginWithPhoneRequest;
 use App\Http\Requests\VerifyLoginCodeRequest;
 use App\Models\User;
 use App\Notifications\VerifyPhone;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -16,11 +16,8 @@ class AuthController extends Controller
         return $request->user();
     }
 
-    public function loginWithPhone(Request $request)
-    {
-        $request->validate([
-            'phone' => ['required', 'numeric', 'digits:10'],
-        ]);
+    public function loginWithPhone(LoginWithPhoneRequest $request)
+    { 
 
         $user = User::firstOrCreate([
             'phone' => $request->phone,
