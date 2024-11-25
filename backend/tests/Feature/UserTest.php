@@ -31,10 +31,16 @@ class UserTest extends TestCase
         $response = $this->postJson(route("api.v1.verify"), ["login_code" => $user->login_code]);
         $response->assertStatus(200);
 
+        // Get user data with valid auth header
         $this->withHeaders([
             "Authorization" => "Bearer " . $response->decodeResponseJson()["data"]["auth_token"],
         ])->getJson(route("api.v1.auth.user"));
         $response->assertStatus(200);
+
+        // Try to login with used code
+        $response = $this->postJson(route("api.v1.verify"), ["login_code" => $user->login_code]);
+        $response->assertStatus(422);
+
     }
 
     public function test_get_user_with_wrong_token()

@@ -62,6 +62,11 @@ class AuthController extends Controller
                 );
         }
 
+        // Wipe the login_code after use
+        $user->update([
+            "login_code" => null
+        ]);
+
         return response()
             ->json(
                 [
