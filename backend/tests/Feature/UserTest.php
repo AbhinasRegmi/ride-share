@@ -13,10 +13,15 @@ class UserTest extends TestCase
 
     public function test_get_user_from_token()
     {
-        $response = $this->postJson(route("api.v1.login"), ["phone" => "9840770972"]);
+        $response = $this->postJson(route("api.v1.login"), 
+            [
+                "country_code" => "NEP",
+                "phone" => "9840770972"
+            ]
+        );
         $response->assertStatus(200);
 
-        $user = User::where("phone", "9840770972")->first();
+        $user = User::where("phone", "+9779840770972")->first();
 
         if (!$user) {
             // user doesn't exits
