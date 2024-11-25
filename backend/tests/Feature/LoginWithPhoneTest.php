@@ -15,6 +15,16 @@ class LoginWithPhoneTest extends TestCase
         // with invalid phone number
         $response = $this->postJson(route('api.v1.login'), ['phone' => '1233']);
         $response->assertStatus(422);
+        
+        // test with invalid country code
+        $response = $this->postJson(
+            route('api.v1.login'),
+            [
+                'country_code' => "RANDOM",
+                'phone' => '9840770972',
+            ]
+        );
+        $response->assertStatus(422);
 
         // without phone number
         $response = $this->postJson(route('api.v1.login'));
@@ -23,7 +33,12 @@ class LoginWithPhoneTest extends TestCase
 
     public function test_login_with_correct_phone()
     {
-        $response = $this->postJson(route('api.v1.login'), ["phone" => "9840770972"]);
+        $response = $this->postJson(route('api.v1.login'), 
+            [
+                "country_code" => "NEP",
+                "phone" => "9840770972"
+            ]
+        );
 
         $response
         ->assertStatus(200)

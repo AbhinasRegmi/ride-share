@@ -35,7 +35,7 @@ class ValidLoginCodeTest extends TestCase
         $login_code = LoginCodeService::generate();
         User::create(
             [
-                "phone" => "9840770972",
+                "phone" => "+9779840770972",
                 "login_code" => $login_code,
             ]
         );
