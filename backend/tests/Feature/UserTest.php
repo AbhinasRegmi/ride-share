@@ -32,7 +32,7 @@ class UserTest extends TestCase
         $response->assertStatus(200);
 
         // Get user data with valid auth header
-        $this->withHeaders([
+        $response = $this->withHeaders([
             "Authorization" => "Bearer " . $response->decodeResponseJson()["data"]["auth_token"],
         ])->getJson(route("api.v1.auth.user"));
         $response->assertStatus(200);

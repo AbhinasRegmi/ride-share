@@ -33,7 +33,7 @@ class User extends Authenticatable
         return $this->phone;
     }
 
-    public function drive(): HasOne 
+    public function driver(): HasOne 
     {
         return $this->hasOne(Driver::class);
     }
